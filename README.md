@@ -34,7 +34,7 @@ Now use your favoriate text editor to modify the json file generated.
 <li> Change "" in the json file with referral address to the referral address you used. If you don't have referral, skip.</li>
 <li> Change YOUR_PRIVATE_KEY in your json file to your private key exported from your wallet. Should be a string of 64 hex characters. Prepend it with 0x</li> 
 <br>
-To get private key for your wallet, go to [metamask faq](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key'>). Becuase the config file contains private key, please don't put file
+To get private key for your wallet, go to <a href="https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key">metamask faq</a>. Becuase the config file contains private key, please don't put file
 in public drive or public computer. <b>Guard this file!!!</b> The finished json file should look like the following:
 <br>
 <pre>
