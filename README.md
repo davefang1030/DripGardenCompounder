@@ -25,14 +25,14 @@ _The code is written in python so you just need to install python and a couple p
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-To use the tool, first we need to set up configuration file which includes your wallet address, referral address you used, and private key. Use the following command to generate a template configure file.
+To use the tool, first we need to set up configuration file which includes your wallet address, referral address you used, and private key. Use the following command to generate a template configure file. The command below generate a template json file named "drip_garden.json" in the directory your are running the command.
    ```sh
    python DripGardenCompounder.py --gencfg ./drip_garden.json
    ```
 Now use your favoriate text editor to modify the json file generated.
-<li> Change YOUR_WALLET_ADDRESS to your wallet address.</li>
-<li> Change "" with referral address to the referral address you used. If you don't have referral, skip.</li>
-<li> Change YOUR_PRIVATE_KEY to your private key exported from your wallet. Should be a string of 64 hex characters.</li> 
+<li> Change YOUR_WALLET_ADDRESS in the json file to your wallet address.</li>
+<li> Change "" in the json file with referral address to the referral address you used. If you don't have referral, skip.</li>
+<li> Change YOUR_PRIVATE_KEY in your json file to your private key exported from your wallet. Should be a string of 64 hex characters. Prepend it with 0x</li> 
 <br>
 To get private key for your wallet, go to [metamask faq](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key'>). Becuase the config file contains private key, please don't put file
 in public drive or public computer. <b>Guard this file!!!</b> The finished json file should look like the following:
