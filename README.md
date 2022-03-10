@@ -17,7 +17,7 @@ _The code is written in python so you just need to install python and a couple p
 2. Install required packages if needed
    ```sh
    pip install web3
-   pip install
+   pip install numpy
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
