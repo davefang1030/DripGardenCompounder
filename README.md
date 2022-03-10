@@ -1,5 +1,5 @@
 # Drip Garden Auto Compounder
-Automated scripts to compound drip garden without losing seeds. #DRIP #AnimalFarm #crypto
+Automated scripts to compound drip garden without losing seeds. #DRIP #AnimalFarm #crypto #web3
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
