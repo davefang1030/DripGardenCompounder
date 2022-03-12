@@ -78,7 +78,8 @@ class DripGardenCompounder:
         nonce = self.web3.eth.getTransactionCount(self.wallet_address)
 
         try:
-            # Not sure how to set gas. So use 100000 which means it could be 0.0005 BNB (about $0.2).
+            # Not sure how to set gas. So use 100000 which means it could be 0.0005 BNB (about $0.2). Other chains
+            # do not need to specify gas etc. when building transactions.
             # BSC chain has not implemented BEP95 (which is similar to EIP-1559) yet???
             compound_seed_tx = self.contract.functions.plantSeeds(self.ref_address).buildTransaction({
                 'chainId': 56,
@@ -90,10 +91,10 @@ class DripGardenCompounder:
             print("### transaction built and ready to send")
             signed_txn = self.web3.eth.account.signTransaction(compound_seed_tx, private_key=self.private_key)
             txn_hash = self.web3.eth.send_raw_transaction(signed_txn.rawTransaction)
-            print(f"### transaction {txn_hash} signed and sent")
-            # wait for 5 minutes for transaction. Hopefully the gas is set correctly so 5 minutes is enough
+            print(f"### transaction {txn_hash.hex()} signed and sent")
+            # wait for 5 minutes for transaction. Hopefully the gas is set correctly
             receipt = self.web3.eth.wait_for_transaction_receipt(txn_hash, timeout=300)
-            print(f"### transaction confirmed at block {receipt['blockNumber']}. tx = {receipt['transactionHash']}")
+            print(f"### transaction confirmed at block {receipt['blockNumber']}. tx = {receipt['transactionHash'].hex()}")
             print(f"### Total gas used = {receipt['gasUsed']}")
         except Exception as err:
             # print out error and exit
@@ -106,12 +107,26 @@ class DripGardenCompounder:
         :return:
         """
         while True:
-            seconds_to_harvest, _ = self.calculate_schedule()
+            seconds_to_harvest, hs = self.calculate_schedule()
             print("Sleeping til harvest ...")
+            """
+            The following code works well if the computer runs the code does not sleep. If somehow computer falls in sleep
+            mode, time.sleep() will suspend and it would not wake up just 10 seconds before harvest time . If it wakes 
+            much later than it needs to, calling plant_seeds() would waste seeds.
             # sleep til harvest time. Add 10 extra seconds to avoid wasting seeds.
             time.sleep(seconds_to_harvest + 10)
-            # compound
-            self.plant_seeds()
+            """
+            # let's check every 60 seconds so the most we would lose is 60 seeds per plant. Not efficient but...
+            while datetime.now() < hs[0]:
+                time.sleep(60)
+
+            # now we are pass the original harvesting schedule. Need to check if we are way behind schedule (potentially
+            # due to computer sleep then wake up much later).
+            if datetime.now() < hs[0] + timedelta(seconds=180):
+                # compound only we are within 3 minutes window. Otherwise we go back to reset schedule and wait again
+                self.plant_seeds()
+                print("sleep for another 5 minutes to make sure transaction is finished and contract updated plants info")
+                time.sleep(300)
 
 
 if __name__ == "__main__":
