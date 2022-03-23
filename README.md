@@ -4,7 +4,7 @@ Automated scripts to compound drip garden without losing seeds. #DRIP #AnimalFar
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-I needed an automated tool to compound without needing to check the schedule on [the animal farm website](theanimal.farm/garden), setting timer on my phone and click
+I needed an automated tool to compound without needing to check the schedule on [the animal farm drip garden](https://theanimal.farm/garden), setting timer on my phone and click
 the button when it is ready. So here it is. Enjoy and use at your own risk.<br>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
